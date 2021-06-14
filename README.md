@@ -15,7 +15,11 @@ module spanner_instance {
   spanner_instance_config = "regional-asia-southeast1"
   spanner_nodes           = 1
   spanner_admins          = ["user:mark@activesops.io"]
-  spanner_databases       = {}
+  spanner_databases       = {    
+    spanner-db01 = {
+      role = "roles/spanner.databaseUser"
+      sa_name = "span01-db01-sa"
+    }
 }
 ```
 
@@ -30,4 +34,4 @@ module spanner_instance {
 | spanner_instance_config | Configuration for the Spanner instance                                                                            | string       |                         | Yes      |
 | spanner_nodes           | Number of nodes for this Spanner instance                                                                         | number       | 1                       | Yes      |
 | spanner_admins          | Users that get assigned the role databaseAdmin in Spanner                                                         | list(string) | `[]`                    | Yes      |
-| spanner_databases       | Map object with the database name and reference to user,role and service account                                  | map(object)  |                         | Yes      |
+| spanner_databases       | Map object with the database name and reference to service account and role                                       | map(object)  |                         | Yes      |
