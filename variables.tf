@@ -6,56 +6,56 @@
 */
 
 variable "project_name" {
-  type = string
+  type        = string
   description = "Project name in GCP"
-  default = ""
+  default     = ""
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "Region to deploy in"
-  default = ""
+  default     = ""
 }
+
+variable "spanner_instance_name" {
+  type        = string
+  description = "Spanner Instance Name"
+  default     = ""
+}
+
+variable "spanner_instance_display_name" {
+  type        = string
+  description = "Spanner Instance Display Name"
+  default     = ""
+}
+
 variable "spanner_instance_config" {
-  type = string
+  type        = string
   description = "Spanner Instance configuration"
-  default = ""
+  default     = ""
 }
 
 variable "spanner_nodes" {
-  type = number
+  type        = number
   description = "Number of Spanner nodes to create"
-  default = 1
+  default     = 1
 }
 
 variable "spanner_admins" {
-  type = list(string)
+  type        = list(string)
   description = "List of Spanner DB admins"
-  default = [] #user:hd@stargazer.com.sg"
+  default     = []  # user:hd@stargazer.com.sg
 }
 
 variable "spanner_databases" {
   type = map(object({
-    name = string
-    role = string
-    members = list(string)
+    name         = string
+    role         = string
+    members      = list(string)
     account_name = string
   }))
   description = "List of databases for Spanner, including IAM role binding"
-  default = {
-    span-db01 = {
-      name = "span-db01"
-      role = "roles/spanner.databaseUser"
-      members = ["eric"]
-      account_name = "span01-db01-sa"
-    },
-    span-db02 = {
-      name = "span-db02"
-      role = "roles/spanner.databaseUser"
-      members = ["mark"]
-      account_name = "span01-db02-sa"
-    }
-  }
+  default = {}
 }
 
 variable "service_accounts" {
