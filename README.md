@@ -28,4 +28,4 @@ module spanner_instance {
 | spanner_nodes           | Number of nodes for this Spanner instance                                                                         | number       | 1                       | Yes      |
 | spanner_databases       | Map object with the database name and reference to user,role and service account                                  | map(object)  |                         | Yes      |
 | spanner_admins          | Users that get assigned the role databaseAdmin in Spanner                                                         | list(string) | `[]`                    | Yes      |
-| service_accounts        | List of service accounts userd by the Spanner DBs                                                                 | map(object)  | `null`                  | Yes      |
+| service_accounts        | List of service accounts used by the Spanner DBs                                                                 | map(object)  | `null`                  | Yes      |
