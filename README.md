@@ -7,15 +7,15 @@ A Terraform module for [Google Cloud](https://cloud.google.com) that simplifies 
 
 ```hcl-terraform
 module spanner_instance {
-  source                  = "github.com/activeops-io/terraform-google-cloud-spanner"
-  project_name            = "my-project"
-  region                  = "asia-southeast1"
-  spanner_name            = "span01"
-  spanner_name            = "spanner01" 
-  spanner_instance_config = "regional-asia-southeast1"
-  spanner_nodes           = 1
-  spanner_admins          = ["user:mark@activesops.io"]
-  spanner_databases       = {    
+  source                        = "github.com/activeops-io/terraform-google-cloud-spanner"
+  project_name                  = "my-project"
+  region                        = "asia-southeast1"
+  spanner_instance_name         = "span01"
+  spanner_instance_display_name = "spanner01" 
+  spanner_instance_config       = "regional-asia-southeast1"
+  spanner_nodes                 = 1
+  spanner_admins                = ["user:mark@activesops.io"]
+  spanner_databases = {    
     spanner-db01 = {
       role = "roles/spanner.databaseUser"
       sa_name = "span01-db01-sa"
