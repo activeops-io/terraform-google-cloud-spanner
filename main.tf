@@ -27,16 +27,16 @@ resource "google_spanner_instance_iam_binding" "spanner-admin-binding" {
 resource "google_spanner_database" "spanner-database" {
   for_each = var.spanner_databases
   instance = google_spanner_instance.spanner.name
-  name     = each.key
+  name     = [each.key]
 }
 
 resource "google_spanner_database_iam_binding" "spanner-database-binding" {
   for_each = var.spanner_databases
   instance = google_spanner_instance.spanner.name
-  database = google_spanner_database.spanner-database[each.key].name
+  database = google_spanner_database.spanner-database.[each.key]
   role     = each.value["role"]
 
   members  = [
-    format("serviceAccount:%s@%s.iam.gserviceaccount.com", each.value["account_name"], var.project_name),
+    format("serviceAccount:%s@%s.iam.gserviceaccount.com", each.value["sa_name"], var.project_name),
   ]
 }

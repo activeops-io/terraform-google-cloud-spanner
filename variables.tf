@@ -52,18 +52,8 @@ variable "spanner_databases" {
     name         = string
     role         = string
     members      = list(string)
-    account_name = string
+    sa_name      = string
   }))
   description = "List of databases for Spanner, including IAM role binding"
   default = {}
 }
-
-variable "service_accounts" {
-  type = map(object({
-    display_name  = string
-    description   = string
-  }))
-  description = "Map of the service accounts to create and their role(s) "
-  default = {}
-}
-
