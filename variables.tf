@@ -49,9 +49,7 @@ variable "spanner_admins" {
 
 variable "spanner_databases" {
   type = map(object({
-    name         = string
     role         = string
-    members      = list(string)
     sa_name      = string
   }))
   description = "List of databases for Spanner, including IAM role binding"
