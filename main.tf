@@ -31,6 +31,7 @@ resource "google_spanner_database" "spanner-database" {
 }
 
 resource "google_spanner_database_iam_binding" "spanner-database-binding" {
+  depends_on = [google_spanner_database.spanner-database]
   for_each = var.spanner_databases
   instance = google_spanner_instance.spanner.name
   database = each.key
