@@ -6,38 +6,37 @@
 */
 
 /*------------------------------------------------------------------
-   Spanner - Instance Config
+   Spanner Instance Config
 ------------------------------------------------------------------*/
-resource "google_spanner_instance" "span01" {
+resource "google_spanner_instance" "spanner" {
   config       = var.spanner_instance_config
-  name         = format("%s-span01", var.project_name)
-  display_name = format("%s spanner 01", var.project_name)
+  name         = var.spanner_instance_name
+  display_name = var.spanner_instance_display_name
   num_nodes    = var.spanner_nodes
 }
 
-resource "google_spanner_instance_iam_binding" "span01-binding" {
-  instance = google_spanner_instance.span01.name
+resource "google_spanner_instance_iam_binding" "spanner-admin-binding" {
+  instance = google_spanner_instance.spanner.name
   role     = "roles/spanner.databaseAdmin"
-
-  members = var.spanner_admins
+  members  = var.spanner_admins
 }
 
 /*------------------------------------------------------------------
-   Spanner - DB Config - span-db01
+   Spanner Database Config
 ------------------------------------------------------------------*/
-resource "google_spanner_database" "span01-databases" {
+resource "google_spanner_database" "spanner-database" {
   for_each = var.spanner_databases
-  instance = google_spanner_instance.span01.name
-  name     = format("%s-%s", var.project_name, each.key)
+  instance = google_spanner_instance.spanner.name
+  name     = each.key
 }
 
-resource "google_spanner_database_iam_binding" "span01-db01-binding" {
+resource "google_spanner_database_iam_binding" "spanner-database-binding" {
   for_each = var.spanner_databases
-  instance = google_spanner_instance.span01.name
-  database = google_spanner_database.span01-databases[each.key].name
+  instance = google_spanner_instance.spanner.name
+  database = google_spanner_database.spanner-database[each.key].name
   role     = each.value["role"]
 
-  members = [
+  members  = [
     format("serviceAccount:%s@%s.iam.gserviceaccount.com", each.value["account_name"], var.project_name),
   ]
 }
