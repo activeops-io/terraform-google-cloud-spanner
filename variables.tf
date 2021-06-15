@@ -44,14 +44,14 @@ variable "spanner_nodes" {
 variable "spanner_admins" {
   type        = list(string)
   description = "List of Spanner DB admins"
-  default     = []  # user:hd@stargazer.com.sg
+  default     = [] # user:hd@stargazer.com.sg
 }
 
 variable "spanner_databases" {
   type = map(object({
-    role         = string
-    sa_name      = string
+    role    = string
+    members = list(string)
   }))
   description = "List of databases for Spanner, including IAM role binding"
-  default = {}
+  default     = {}
 }
